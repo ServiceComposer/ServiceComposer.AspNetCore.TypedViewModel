@@ -9,7 +9,7 @@ using ServiceComposer.AspNetCore.Testing;
 using ServiceComposer.AspNetCore.TypedViewModel.Tests.Models;
 using Xunit;
 
-namespace ServiceComposer.AspNetCore.Endpoints.Tests
+namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
 {
     namespace Controllers
     {

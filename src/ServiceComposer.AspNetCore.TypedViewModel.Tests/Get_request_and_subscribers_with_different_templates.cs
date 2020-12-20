@@ -8,7 +8,7 @@ using ServiceComposer.AspNetCore.Testing;
 using ServiceComposer.AspNetCore.TypedViewModel.Tests.Models;
 using Xunit;
 
-namespace ServiceComposer.AspNetCore.Endpoints.Tests
+namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
 {
     public class Get_request_and_subscribers_with_different_templates
     {

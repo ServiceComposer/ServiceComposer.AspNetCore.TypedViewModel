@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ServiceComposer.AspNetCore.Testing;
 using Xunit;
 
-namespace ServiceComposer.AspNetCore.Endpoints.Tests
+namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
 {
     public class When_using_custom_services_registration_handlers
     {

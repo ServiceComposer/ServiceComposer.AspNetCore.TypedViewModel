@@ -14,7 +14,7 @@ using ServiceComposer.AspNetCore.Testing;
 using ServiceComposer.AspNetCore.TypedViewModel.Tests.Models;
 using Xunit;
 
-namespace ServiceComposer.AspNetCore.Endpoints.Tests
+namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
 {
     public class Post_with_2_handlers
     {
