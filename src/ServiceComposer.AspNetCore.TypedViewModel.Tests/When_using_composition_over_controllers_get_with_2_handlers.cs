@@ -18,6 +18,8 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
         public class SampleController : ControllerBase
         {
             [HttpGet("{id}")]
+            [TypedViewModel(typeof(INumber))]
+            [TypedViewModel(typeof(IString))]
             public Task<object> Get(int id)
             {
                 return Task.FromResult((object)null);
@@ -76,11 +78,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.RegisterCompositionHandler<TestGetStrinHandler>();
                         options.RegisterCompositionHandler<CaseSensitiveRoute_TestGetIntegerHandler>();
                         options.EnableCompositionOverControllers();
-                        options.TypedViewModelsOptions(typedViewModelsOptions =>
-                        {
-                            typedViewModelsOptions.RegisterTypedViewModel<IString>();
-                            typedViewModelsOptions.RegisterTypedViewModel<INumber>();
-                        });
+                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                     services.AddControllers()
@@ -124,11 +122,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.RegisterCompositionHandler<TestGetStrinHandler>();
                         options.RegisterCompositionHandler<CaseInsensitiveRoute_TestGetIntegerHandler>();
                         options.EnableCompositionOverControllers(useCaseInsensitiveRouteMatching: true);
-                        options.TypedViewModelsOptions(typedViewModelsOptions =>
-                        {
-                            typedViewModelsOptions.RegisterTypedViewModel<IString>();
-                            typedViewModelsOptions.RegisterTypedViewModel<INumber>();
-                        });
+                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                     services.AddControllers()

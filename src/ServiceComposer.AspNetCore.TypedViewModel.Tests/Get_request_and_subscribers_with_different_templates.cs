@@ -17,6 +17,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
         class TestGetHandlerThatAppendAStringAndRaisesTestEvent : ICompositionRequestsHandler
         {
             [HttpGet("/sample/{id}")]
+            [TypedViewModel(typeof(IString))]
             public async Task Handle(HttpRequest request)
             {
                 var vm = request.GetComposedResponseModel<IString>();
@@ -69,10 +70,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.RegisterCompositionHandler<TestGetHandlerThatAppendAStringAndRaisesTestEvent>();
                         options.RegisterCompositionHandler<TestGetSubscriberThatAppendAnotherStringWhenTestEventIsRaised>();
                         options.RegisterCompositionHandler<TestGetSubscriberNotUsedTemplate>();
-                        options.TypedViewModelsOptions(typedViewModelsOptions =>
-                        {
-                            typedViewModelsOptions.RegisterTypedViewModels(new[] {typeof(IString)});
-                        });
+                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                 },

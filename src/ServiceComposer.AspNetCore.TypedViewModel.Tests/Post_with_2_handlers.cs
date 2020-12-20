@@ -21,6 +21,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
         class TestIntegerHandler : ICompositionRequestsHandler
         {
             [HttpPost("/sample/{id}")]
+            [TypedViewModel(typeof(INumber))]
             public async Task Handle(HttpRequest request)
             {
                 request.Body.Position = 0;
@@ -36,6 +37,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
         class TestStrinHandler : ICompositionRequestsHandler
         {
             [HttpPost("/sample/{id}")]
+            [TypedViewModel(typeof(IString))]
             public async Task Handle(HttpRequest request)
             {
                 request.Body.Position = 0;
@@ -64,11 +66,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.AssemblyScanner.Disable();
                         options.RegisterCompositionHandler<TestStrinHandler>();
                         options.RegisterCompositionHandler<TestIntegerHandler>();
-                        options.TypedViewModelsOptions(typedViewModelsOptions =>
-                        {
-                            typedViewModelsOptions.RegisterTypedViewModel<IString>();
-                            typedViewModelsOptions.RegisterTypedViewModel<INumber>();
-                        });
+                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                 },

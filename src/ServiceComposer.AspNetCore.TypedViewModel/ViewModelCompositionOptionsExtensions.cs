@@ -7,13 +7,9 @@ namespace ServiceComposer.AspNetCore
 {
     public static class ViewModelCompositionOptionsExtensions
     {
-        private static readonly TypedViewModelsOptions typedViewModelsOptions = new(); 
-        public static void TypedViewModelsOptions(this ViewModelCompositionOptions options, Action<TypedViewModelsOptions> configure)
+        public static void EnableTypedViewModelSupport(this ViewModelCompositionOptions options)
         {
-            options.Services.TryAddSingleton(typedViewModelsOptions);
             options.Services.TryAddSingleton(typeof(IViewModelFactory), typeof(CastleDynamicProxyViewModelFactory));
-            
-            configure(typedViewModelsOptions);
         }
     }
 }

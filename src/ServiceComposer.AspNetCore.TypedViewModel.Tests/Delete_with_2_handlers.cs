@@ -17,6 +17,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
         class TestIntegerHandler : ICompositionRequestsHandler
         {
             [HttpDelete("/sample/{id}")]
+            [TypedViewModel(typeof(INumber))]
             public Task Handle(HttpRequest request)
             {
                 var vm = request.GetComposedResponseModel<INumber>();
@@ -29,6 +30,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
         class TestStrinHandler : ICompositionRequestsHandler
         {
             [HttpDelete("/sample/{id}")]
+            [TypedViewModel(typeof(IString))]
             public Task Handle(HttpRequest request)
             {
                 var vm = request.GetComposedResponseModel<IString>();
@@ -51,10 +53,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.AssemblyScanner.Disable();
                         options.RegisterCompositionHandler<TestStrinHandler>();
                         options.RegisterCompositionHandler<TestIntegerHandler>();
-                        options.TypedViewModelsOptions(typedViewModelsOptions =>
-                        {
-                            typedViewModelsOptions.RegisterTypedViewModels(new []{typeof(INumber), typeof(IString)});
-                        });
+                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                 },

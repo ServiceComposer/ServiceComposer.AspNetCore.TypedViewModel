@@ -9,15 +9,17 @@ namespace ServiceComposer.AspNetCore
         public static T GetComposedResponseModel<T>(this Microsoft.AspNetCore.Http.HttpRequest request)
             where T :  class { }
     }
-    public class TypedViewModelsOptions
-    {
-        public TypedViewModelsOptions() { }
-        public System.Collections.Generic.IEnumerable<System.Type> ViewModelTypes { get; }
-        public void RegisterTypedViewModel<TViewModel>() { }
-        public void RegisterTypedViewModels(System.Type[] viewModelTypes) { }
-    }
     public static class ViewModelCompositionOptionsExtensions
     {
-        public static void TypedViewModelsOptions(this ServiceComposer.AspNetCore.ViewModelCompositionOptions options, System.Action<ServiceComposer.AspNetCore.TypedViewModelsOptions> configure) { }
+        public static void EnableTypedViewModelSupport(this ServiceComposer.AspNetCore.ViewModelCompositionOptions options) { }
+    }
+}
+namespace ServiceComposer.AspNetCore.TypedViewModel
+{
+    [System.AttributeUsage(System.AttributeTargets.Method | System.AttributeTargets.All, AllowMultiple=true, Inherited=false)]
+    public class TypedViewModelAttribute : System.Attribute
+    {
+        public TypedViewModelAttribute(System.Type viewModelType) { }
+        public System.Type Type { get; }
     }
 }

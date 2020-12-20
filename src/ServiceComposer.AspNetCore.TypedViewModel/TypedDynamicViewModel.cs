@@ -7,8 +7,11 @@ namespace ServiceComposer.AspNetCore.TypedViewModel
         public TypedDynamicViewModel(ILogger<DynamicViewModel> logger, CompositionContext compositionContext, TypedViewModel typedViewModel)
             : base(logger, compositionContext)
         {
-            TypedViewModel = typedViewModel;
-            TypedViewModel.ViewModel = this;
+            if (typedViewModel != null)
+            {
+                TypedViewModel = typedViewModel;
+                TypedViewModel.ViewModel = this;
+            }
         }
         public TypedViewModel TypedViewModel { get; }
         

@@ -22,6 +22,8 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
         public class CompositionOverControllerPostController : ControllerBase
         {
             [HttpPost("{id}")]
+            [TypedViewModel(typeof(INumber))]
+            [TypedViewModel(typeof(IString))]
             public Task<object> Post(int id)
             {
                 return Task.FromResult((object)null);
@@ -61,7 +63,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
             }
         }
 
-        class TestStrinHandler : ICompositionRequestsHandler
+        class TestStringHandler : ICompositionRequestsHandler
         {
             [HttpPost("/api/CompositionOverControllerPost/{id}")]
             public async Task Handle(HttpRequest request)
@@ -90,15 +92,11 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                     services.AddViewModelComposition(options =>
                     {
                         options.AssemblyScanner.Disable();
-                        options.RegisterCompositionHandler<TestStrinHandler>();
+                        options.RegisterCompositionHandler<TestStringHandler>();
                         options.RegisterCompositionHandler<TestIntegerHandler>();
                         options.EnableCompositionOverControllers();
                         options.EnableWriteSupport();
-                        options.TypedViewModelsOptions(typedViewModelsOptions =>
-                        {
-                            typedViewModelsOptions.RegisterTypedViewModel<IString>();
-                            typedViewModelsOptions.RegisterTypedViewModel<INumber>();
-                        });
+                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                     services.AddControllers()
