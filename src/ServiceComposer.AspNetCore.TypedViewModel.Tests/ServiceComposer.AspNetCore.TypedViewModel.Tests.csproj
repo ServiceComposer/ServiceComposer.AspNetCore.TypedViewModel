@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <IsPackable>false</IsPackable>
@@ -8,6 +8,8 @@
     <ItemGroup>
         <PackageReference Include="Castle.Core" Version="4.4.1" />
         <PackageReference Include="ServiceComposer.AspNetCore" Version="1.7.2-pr.155.build-id.36926444.alpha.0.9" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.5" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,11 +31,6 @@
         <ParentFile>APIApprovals</ParentFile>
         <DependentUpon>APIApprovals.cs</DependentUpon>
       </None>
-      <None Update="API\NET5_0\APIApprovals.Approve_API.approved.txt.orig">
-        <ParentExtension>.cs</ParentExtension>
-        <ParentFile>APIApprovals</ParentFile>
-        <DependentUpon>APIApprovals.cs</DependentUpon>
-      </None>
       <None Update="API\NETCOREAPP2_1\APIApprovals.Approve_API.approved.txt">
         <ParentExtension>.cs</ParentExtension>
         <ParentFile>APIApprovals</ParentFile>
@@ -49,11 +46,6 @@
         <ParentFile>APIApprovals</ParentFile>
         <DependentUpon>APIApprovals.cs</DependentUpon>
       </None>
-      <None Update="API\NETCOREAPP3_1\APIApprovals.Approve_API.approved.txt.orig">
-        <ParentExtension>.cs</ParentExtension>
-        <ParentFile>APIApprovals</ParentFile>
-        <DependentUpon>APIApprovals.cs</DependentUpon>
-      </None>
       <None Update="API\APIApprovals.Approve_API.approved.txt.orig">
         <ParentExtension>.cs</ParentExtension>
         <ParentFile>APIApprovals</ParentFile>
@@ -63,6 +55,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ServiceComposer.AspNetCore.TypedViewModel\ServiceComposer.AspNetCore.TypedViewModel.csproj" />
+      <ProjectReference Include="..\TestClassLibraryWithHandlers\TestClassLibraryWithHandlers.csproj" />
     </ItemGroup>
 
 </Project>

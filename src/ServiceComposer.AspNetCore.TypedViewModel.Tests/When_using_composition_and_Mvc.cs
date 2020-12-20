@@ -9,9 +9,22 @@ using ServiceComposer.AspNetCore.Testing;
 using ServiceComposer.AspNetCore.TypedViewModel.Tests.Models;
 using Xunit;
 
-namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
+namespace ServiceComposer.AspNetCore.Endpoints.Tests
 {
-    public class Get_with_2_handlers
+    namespace Controllers
+    {
+        [Route("api/sample")]
+        public class SampleApiController : Controller
+        {
+            [HttpGet("{id}")]
+            public Task<int> Get(int id)
+            {
+                return Task.FromResult(id);
+            }
+        }
+    }
+
+    public class When_using_composition_and_Mvc
     {
         class TestGetIntegerHandler : ICompositionRequestsHandler
         {
@@ -20,9 +33,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
             {
                 var routeData = request.HttpContext.GetRouteData();
                 var vm = request.GetComposedResponseModel<INumber>();
-                
                 vm.ANumber = int.Parse(routeData.Values["id"].ToString());
-
                 return Task.CompletedTask;
             }
         }
@@ -39,10 +50,10 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
         }
 
         [Fact]
-        public async Task Returns_expected_response()
+        public async Task Both_composition_endpoint_and_Mvc_endpoint_return_expected_values()
         {
             // Arrange
-            var client = new SelfContainedWebApplicationFactoryWithWebHost<Get_with_2_handlers>
+            var client = new SelfContainedWebApplicationFactoryWithWebHost<When_using_composition_and_Mvc>
             (
                 configureServices: services =>
                 {
@@ -51,29 +62,40 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.AssemblyScanner.Disable();
                         options.RegisterCompositionHandler<TestGetStrinHandler>();
                         options.RegisterCompositionHandler<TestGetIntegerHandler>();
-                        options.RegisterTypedViewModels(new []{typeof(INumber), typeof(IString)});
+                        options.RegisterTypedViewModel<IString>();
+                        options.RegisterTypedViewModel<INumber>();
                     });
+                    services.AddControllers();
                     services.AddRouting();
                 },
                 configure: app =>
                 {
                     app.UseRouting();
-                    app.UseEndpoints(builder => builder.MapCompositionHandlers());
+                    app.UseEndpoints(builder =>
+                    {
+                        builder.MapCompositionHandlers();
+                        builder.MapControllers();
+                    });
                 }
             ).CreateClient();
 
             client.DefaultRequestHeaders.Add("Accept-Casing", "casing/pascal");
+
             // Act
-            var response = await client.GetAsync("/sample/1");
+            var composedResponse = await client.GetAsync("/sample/1");
+            var apiResponse = await client.GetAsync("/api/sample/32");
 
             // Assert
-            Assert.True(response.IsSuccessStatusCode);
+            Assert.True(composedResponse.IsSuccessStatusCode);
+            Assert.True(apiResponse.IsSuccessStatusCode);
 
-            var responseString = await response.Content.ReadAsStringAsync();
-            var responseObj = JObject.Parse(responseString);
+            var responseObj = JObject.Parse(await composedResponse.Content.ReadAsStringAsync());
 
             Assert.Equal("sample", responseObj?.SelectToken("AString")?.Value<string>());
             Assert.Equal(1, responseObj?.SelectToken("ANumber")?.Value<int>());
+
+            var apiResponseObj = await apiResponse.Content.ReadAsStringAsync();
+            Assert.Equal(32, int.Parse(apiResponseObj));
         }
     }
 }

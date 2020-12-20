@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceComposer.AspNetCore.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceComposer.AspNetCore.TypedViewModel.Tests", "ServiceComposer.AspNetCore.TypedViewModel.Tests\ServiceComposer.AspNetCore.TypedViewModel.Tests.csproj", "{FE4F073A-CB69-4333-AFD8-013491F5D8E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClassLibraryWithHandlers", "TestClassLibraryWithHandlers\TestClassLibraryWithHandlers.csproj", "{57F9E87D-EF0F-4005-9068-EB2ABC72DD0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{FE4F073A-CB69-4333-AFD8-013491F5D8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE4F073A-CB69-4333-AFD8-013491F5D8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE4F073A-CB69-4333-AFD8-013491F5D8E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F9E87D-EF0F-4005-9068-EB2ABC72DD0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F9E87D-EF0F-4005-9068-EB2ABC72DD0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F9E87D-EF0F-4005-9068-EB2ABC72DD0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F9E87D-EF0F-4005-9068-EB2ABC72DD0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
