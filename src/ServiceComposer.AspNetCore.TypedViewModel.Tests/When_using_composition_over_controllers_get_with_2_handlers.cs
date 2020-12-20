@@ -76,8 +76,11 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.RegisterCompositionHandler<TestGetStrinHandler>();
                         options.RegisterCompositionHandler<CaseSensitiveRoute_TestGetIntegerHandler>();
                         options.EnableCompositionOverControllers();
-                        options.RegisterTypedViewModel<IString>();
-                        options.RegisterTypedViewModel<INumber>();
+                        options.TypedViewModelsOptions(typedViewModelsOptions =>
+                        {
+                            typedViewModelsOptions.RegisterTypedViewModel<IString>();
+                            typedViewModelsOptions.RegisterTypedViewModel<INumber>();
+                        });
                     });
                     services.AddRouting();
                     services.AddControllers()
@@ -121,8 +124,11 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.RegisterCompositionHandler<TestGetStrinHandler>();
                         options.RegisterCompositionHandler<CaseInsensitiveRoute_TestGetIntegerHandler>();
                         options.EnableCompositionOverControllers(useCaseInsensitiveRouteMatching: true);
-                        options.RegisterTypedViewModel<IString>();
-                        options.RegisterTypedViewModel<INumber>();
+                        options.TypedViewModelsOptions(typedViewModelsOptions =>
+                        {
+                            typedViewModelsOptions.RegisterTypedViewModel<IString>();
+                            typedViewModelsOptions.RegisterTypedViewModel<INumber>();
+                        });
                     });
                     services.AddRouting();
                     services.AddControllers()

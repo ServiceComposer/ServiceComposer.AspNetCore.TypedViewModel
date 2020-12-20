@@ -10,20 +10,20 @@ namespace ServiceComposer.AspNetCore.TypedViewModel
 {
     class CastleDynamicProxyViewModelFactory : IViewModelFactory
     {
-        HashSet<Type> typedViewModelTypes = new();
-        ProxyGenerator generator = new();
+        private readonly TypedViewModelsOptions _typedViewModelsOptions;
+        private static ProxyGenerator generator = new();
 
-        public void RegisterTypedViewModel(Type viewModelType)
+        public CastleDynamicProxyViewModelFactory(TypedViewModelsOptions typedViewModelsOptions)
         {
-            typedViewModelTypes.Add(viewModelType);
+            _typedViewModelsOptions = typedViewModelsOptions;
         }
-
+        
         public DynamicViewModel CreateViewModel(HttpContext httpContext, CompositionContext compositionContext)
         {
             var logger = httpContext.RequestServices.GetRequiredService<ILogger<DynamicViewModel>>();
             var typedViewModel = (TypedViewModel) generator.CreateClassProxy(
                 typeof(TypedViewModel),
-                typedViewModelTypes.ToArray(),
+                _typedViewModelsOptions.ViewModelTypes.ToArray(),
                 ProxyGenerationOptions.Default,
                 new object[0],
                 new TypedViewModelInterceptor());

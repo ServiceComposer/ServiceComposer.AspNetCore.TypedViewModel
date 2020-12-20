@@ -62,8 +62,11 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.AssemblyScanner.Disable();
                         options.RegisterCompositionHandler<TestGetStrinHandler>();
                         options.RegisterCompositionHandler<TestGetIntegerHandler>();
-                        options.RegisterTypedViewModel<IString>();
-                        options.RegisterTypedViewModel<INumber>();
+                        options.TypedViewModelsOptions(typedViewModelsOptions =>
+                        {
+                            typedViewModelsOptions.RegisterTypedViewModel<IString>();
+                            typedViewModelsOptions.RegisterTypedViewModel<INumber>();
+                        });
                     });
                     services.AddControllers();
                     services.AddRouting();
