@@ -96,7 +96,6 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.RegisterCompositionHandler<TestIntegerHandler>();
                         options.EnableCompositionOverControllers();
                         options.EnableWriteSupport();
-                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                     services.AddControllers()

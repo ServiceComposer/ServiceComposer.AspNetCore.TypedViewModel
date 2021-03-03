@@ -57,7 +57,6 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.AssemblyScanner.Disable();
                         options.RegisterCompositionHandler<TestGetHandlerThatAppendAStringAndRaisesTestEvent>();
                         options.RegisterCompositionHandler<TestGetSubscriberThatAppendAnotherStringWhenTestEventIsRaised>();
-                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                 },

@@ -20,7 +20,7 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests.API
         #endif
         public void Approve_API()
         {
-            var publicApi = typeof(CastleDynamicProxyViewModelFactory).Assembly.GeneratePublicApi();
+            var publicApi = typeof(TypedViewModelAttribute).Assembly.GeneratePublicApi();
 
             Approvals.Verify(publicApi);
         }

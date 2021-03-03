@@ -90,7 +90,6 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.RegisterCompositionHandler<TestStrinHandler>();
                         options.RegisterCompositionHandler<TestIntegerHandler>();
                         options.RegisterCompositionHandler<TestStringSubcriber>();
-                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                 },

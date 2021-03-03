@@ -53,7 +53,6 @@ namespace ServiceComposer.AspNetCore.TypedViewModel.Tests
                         options.AssemblyScanner.Disable();
                         options.RegisterCompositionHandler<TestGetStrinHandler>();
                         options.RegisterCompositionHandler<TestGetIntegerHandler>();
-                        options.EnableTypedViewModelSupport();
                     });
                     services.AddRouting();
                 },

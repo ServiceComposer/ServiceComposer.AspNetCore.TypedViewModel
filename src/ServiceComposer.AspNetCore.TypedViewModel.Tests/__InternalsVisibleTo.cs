@@ -1,4 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
 
-//Required by Castle DynamicProxy
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+//Required by ImpromptuInterface
+[assembly: InternalsVisibleTo("ImpromptuInterfaceDynamicAssembly")]
