@@ -1,0 +1,20 @@
+[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "https://github.com/ServiceComposer/ServiceComposer.AspNetCore.TypedViewModel.git")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("ServiceComposer.AspNetCore.TypedViewModel.Tests")]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETCoreApp,Version=v5.0", FrameworkDisplayName="")]
+namespace ServiceComposer.AspNetCore
+{
+    public static class HttpRequestExtensions
+    {
+        public static T GetTypedViewModel<T>(this Microsoft.AspNetCore.Http.HttpRequest request)
+            where T :  class { }
+    }
+}
+namespace ServiceComposer.AspNetCore.TypedViewModel
+{
+    [System.AttributeUsage(System.AttributeTargets.Method | System.AttributeTargets.All, AllowMultiple=true, Inherited=false)]
+    public class TypedViewModelAttribute : System.Attribute
+    {
+        public TypedViewModelAttribute(System.Type viewModelType) { }
+        public System.Type Type { get; }
+    }
+}
